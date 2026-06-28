@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        .card {
+            background: rgb(226, 209, 209);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 10px 10px;
+
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.05),
+                0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Admin Panel</h1>
+        <form class="row g-3" action="/" method="POST">
+            <div class="col-md-4">
+                <label for="" class="form-label">Id</label>
+                <input type="text" class="form-control" id="username" name="n" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Enter Name</label>
+                <input type="text" class="form-control" id="" name="name" required>
+            </div>
+            <div class="col-md-4">
+                <label for="" class="form-label">Email</label>
+                <div class="input-group">
+                    <input type="email" class="form-control" id="" name="email" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="" class="form-label">Password</label>
+                <input type="text" class="form-control" id="" name="password" required>
+            </div>
+            <div class="col-md-3">
+                <label for="validationDefault04" class="form-label">Address</label>
+                <input type="text" class="form-control" id="" name="address" required>
+
+            </div>
+            <div class="col-md-3">
+                <label for="validationDefault05" class="form-label">Add Column</label>
+                <input type="text" class="form-control" id="validationDefault05" name="add_column" required>
+            </div>
+
+            <div class="col-12">
+                <input class="btn btn-primary form-control" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="card table-primary" id="table">
+        <table border="1px" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Address</th>
+                    <th>Change</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users%}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.address}}</td>
+                    <td>
+                        <a href="{{url_for('update_user' , id=user.id)}}">Edit</a>
+                        <form action="{{url_for('delete_user' , id=user.id)}}" method="POST" style="display: inline">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
